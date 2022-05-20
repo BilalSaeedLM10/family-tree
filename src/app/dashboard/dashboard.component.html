@@ -7,11 +7,11 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mrgnbtm">
-            <h2>ToDo List</h2>
-            <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+            <h2>Relatives of Mr. {{baseNodeObj?.name}}</h2>
+            <!-- <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
               <div class="row">
                 <div class="form-group col-md-6">
-                  <label for="exampleInputEmail1">Task</label>
+                  <label for="exampleInputEmail1">Name</label>
                   <input type="text" class="form-control" formControlName="task" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Create a Task">
                 </div>
                 <div class="form-group col-md-6">
@@ -30,20 +30,33 @@
                 </div>
               </div>
               <button type="submit" [disabled]="!todoForm.valid" class="btn btn-danger">Create</button>
-            </form>
+            </form> -->
+            <div class="container">
+              <input type="text" id="myInput" (input)="searchList($event.target.value)" placeholder="Search for relatives.." title="Type in a name">
+
+              <ul class="responsive-table">
+                <li class="table-header">
+                  <div class="col col-1">Name</div>
+                  <div class="col col-2">Relatiion</div>
+                  <div class="col col-2">Actions</div>
+                </li>
+                <li class="table-row" *ngFor="let item of this.filteredData">
+                  <div class="col col-1" >{{item.name}}</div>
+                  <div class="col col-2">{{item.relation}}</div>
+                  <div class="col col-2">
+                    <button class="btn btn-primary btn-sm m-1"  >Edit</button>
+                    <button class="btn btn-danger btn-sm"  (click)="deleteFromList(item)">Delete</button>
+
+                  </div>
+                </li>
+               
+              </ul>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="mrgnbtm">
-        <app-tasks
-          *ngIf="tasks !== undefined && tasks?.length !== 0"
-          [tasks]="tasks"
-          (deleteTask)="deleteTask($event)"
-          (editTask)="editTask($event)"
-          >
-        </app-tasks>
-      </div>
+      
   </div>
 </div>
 

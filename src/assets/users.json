@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "email": "super_admin@email.com",
+        "password": "admin123$",
+        "name": "Admin",
+        "role": "admin",
+        "permissions": "all"
+    },
+    {
+        "id": 2,
+        "email": "demo_user@email.com",
+        "password": "user123$",
+        "name": "User",
+        "role": "user",
+        "permissions": "view"
+    }    
+]

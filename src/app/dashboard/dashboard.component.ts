@@ -15,55 +15,52 @@ import * as fromRoot from '../app-state';
 })
 export class DashboardComponent implements OnInit {
 
-  user: any;
-  tasks: any[] = [];
 
-  constructor(private router: Router, private readonly store: Store) {
-    this.store.select(fromRoot.getLoggedInUser).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(data => this.user = data.user);
+  filteredData: any = []
+  baseNodeObj: any = {}
 
-    this.store.select(fromRoot.getTasks).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(data => this.tasks = data.tasks);
-  }
 
-  todoForm = new FormGroup({
-    task: new FormControl('', Validators.nullValidator && Validators.required),
-    assignee: new FormControl('', Validators.nullValidator && Validators.required),
-    status: new FormControl('', Validators.nullValidator && Validators.required)
-  });
+  constructor(private router: Router, public todo: TodoService) {
+    todo.getRelatives().subscribe((x: any) => {
+      console.log({x});
+      this.todo.data = x
+      this.filteredData = x
+      this.baseNodeObj =  x.find((y) => y.relation.toLowerCase() == 'base node' )
+      
+    })
+    console.log('USERS: ', this.todo.data);
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
-
-  onSubmit() {
-    console.log(this.todoForm.value);
-    const task = {
-      task: this.todoForm.value.task,
-      assignee: this.todoForm.value.assignee,
-      status: this.todoForm.value.status
-    };
-    this.store.dispatch(todoActions.createTask({task}));
-    this.todoForm.reset();
-  }
-
-  deleteTask(taskid: any) {
-    console.log('deleting this task:::', taskid);
-    this.store.dispatch(todoActions.deleteTask({taskid}));
-  }
-
-  editTask(task: any) {
-    console.log('editing this task:::', task);
-    this.store.dispatch(todoActions.editTask({task}));
   }
 
   ngOnDestroy() {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
+
   }
 
   ngOnInit(): void {
+    
+  }
 
+  searchList(val: string){
+    console.log({val});
+    this.filteredData = this.todo.data.filter((x) => {
+
+      if (x.name.toLowerCase().includes(val.toLowerCase())){
+        return x
+      }
+      else if (x.relation.toLowerCase().includes(val.toLowerCase())){
+        return x
+      }
+      return
+
+    })
+    
+  }
+
+  deleteFromList(item){
+    const index = this.filteredData.indexOf(item);
+    if (index != -1){
+      this.filteredData.splice(index, 1)
+    }
   }
 
 }

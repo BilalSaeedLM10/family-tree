@@ -1,0 +1,15 @@
+[
+    {"name": "Ahmed Khurrum", "relation": "Base Node"},
+    {"name": "Kareem Khurrum", "relation": "Brother"},
+    {"name": "Sultan Khurrum", "relation": "Brother"},
+    {"name": "Azhar Khurrum", "relation": "Brother"},
+    {"name": "Faiz Ahmed ", "relation": "Son"},
+    {"name": "Hina Khurrum", "relation": "Wife"},
+    {"name": "Shugufta", "relation": "Mother"},
+    {"name": "Alina", "relation": "Mother-in-Law"},
+    {"name": "Khurrum Javed", "relation": "Father"},
+    {"name": "Zaid", "relation": "father-in-Law"},
+    {"name": "Sabiha", "relation": "Sister"}
+    
+    
+  ]

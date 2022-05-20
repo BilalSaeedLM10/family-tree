@@ -6,6 +6,7 @@ import * as userActions from '../app-state/actions';
 import * as fromRoot from '../app-state';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { TodoService } from '../_services';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,9 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router, private readonly store: Store) {
+  users: any = []
+
+  constructor(private router: Router, private readonly store: Store, private todo: TodoService) {
     this.store.select(fromRoot.userLogin).pipe(
       takeUntil(this.destroy$)
     ).subscribe(data => {
@@ -23,6 +26,10 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.router.navigate(['/dashboard']);
       }
     });
+   this.todo.getUsers().subscribe((x) => {
+      this.users = x
+    })
+    
   }
 
   model: User = new User();
@@ -33,7 +40,13 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   onSubmit(loginForm: NgForm) {
     console.log(this.model)
-    this.router.navigate(['/dashboard']);
+    for (const iterator of this.users) {
+      if (iterator.email == this.model.email && iterator.password == this.model.password){
+        this.router.navigate(['/dashboard']);
+        return
+      } 
+    }
+    alert('Wrong email or password')
   }
 
   ngOnDestroy(){
