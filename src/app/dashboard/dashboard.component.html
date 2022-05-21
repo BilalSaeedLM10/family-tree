@@ -63,7 +63,7 @@
                   </select>
                 </div>
                 <div class="col col-3">
-                  <div *ngIf="user.permission == 'all'; else unAuthorized">
+                  <div *ngIf="user.permissions == 'all'; else unAuthorized">
                     <button
                       class="btn btn-primary btn-sm m-1"
                       (click)="isEditOn = !isEditOn; editItems(item)"

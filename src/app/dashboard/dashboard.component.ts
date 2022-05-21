@@ -32,8 +32,7 @@ export class DashboardComponent implements OnInit {
         this.allNodes.push(x.name);
       });
       this.allNodes = [...new Set(this.allNodes)];
-      const user = localStorage.getItem("user");
-      this.user = user;
+
 
       console.log("All nodes", this.allNodes);
     });
@@ -43,7 +42,10 @@ export class DashboardComponent implements OnInit {
   ngOnDestroy() {}
 
   ngOnInit(): void {
-    console.log(this.divHello);
+    const user = localStorage.getItem("user");
+    this.user = JSON.parse(user);
+    console.log({user});
+    
   }
 
   searchList(val: string) {
