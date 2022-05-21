@@ -1,21 +1,19 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgModule } from "@angular/core";
+import { CommonModule } from "@angular/common";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { DashboardRoutingModule } from './dashboard-routing.module';
-import { DashboardComponent } from './dashboard.component';
-import { SharedModule } from '../shared/shared.module';
-import { TasksComponent } from './tasks/tasks.component';
-
+import { DashboardRoutingModule } from "./dashboard-routing.module";
+import { DashboardComponent } from "./dashboard.component";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
-  declarations: [DashboardComponent, TasksComponent],
+  declarations: [DashboardComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    DashboardRoutingModule
-  ]
+    DashboardRoutingModule,
+  ],
 })
-export class DashboardModule { }
+export class DashboardModule {}

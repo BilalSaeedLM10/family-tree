@@ -1,24 +1,21 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
-
 export class TodoService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-
-  data: any =  []
+  data: any = [];
+  chartData: any = {};
 
   getUsers() {
     return this.http.get("assets/users.json");
   }
 
-  getRelatives(){
+  getRelatives() {
     return this.http.get("assets/relatives.json");
-
   }
 
   // addTask(task: any) {

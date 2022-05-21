@@ -3,60 +3,83 @@
   <div class="col-md-2">
     <app-leftnav></app-leftnav>
   </div>
+
   <div class="col-md-10 mrgtop5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mrgnbtm">
-            <h2>Relatives of Mr. {{baseNodeObj?.name}}</h2>
-            <!-- <form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
-              <div class="row">
-                <div class="form-group col-md-6">
-                  <label for="exampleInputEmail1">Name</label>
-                  <input type="text" class="form-control" formControlName="task" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Create a Task">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mrgnbtm">
+          <button class="btn btn-danger btn-sm" (click)="generateGraph()">
+            GENERATE CHART
+          </button>
+          <h2>Relatives of Mr. {{ baseNodeObj?.name }}</h2>
+
+          <div class="container">
+            <input
+              type="text"
+              id="myInput"
+              (input)="searchList($event.target.value)"
+              placeholder="Search for relatives.."
+              title="Type in a name"
+            />
+
+            <ul class="responsive-table">
+              <li class="table-header">
+                <div class="col col-1">Name</div>
+                <div class="col col-2">Relatiion</div>
+                <div class="col col-2">Actions</div>
+              </li>
+              <li class="table-row" *ngFor="let item of this.filteredData">
+                <div class="col col-1">
+                  <span *ngIf="!isEditOn">{{ item.name }}</span>
+                  <input
+                    *ngIf="isEditOn"
+                    type="text"
+                    [(ngModel)]="item.name"
+                    id="myInput"
+                    style="width: 200px; height: 25px"
+                    title="Type in a name"
+                  />
                 </div>
-                <div class="form-group col-md-6">
-                  <label for="exampleInputPassword1">Assignee</label>
-                  <input type="text" class="form-control" formControlName="assignee" id="exampleInputPassword1" placeholder="Assignee">
-                </div>
-              </div>
-              <div class="row">
-                <div class="form-group col-md-12">
-                  <label for="sel1">Status:</label>
-                  <select formControlName="status" class="form-control" id="sel1">
-                    <option>To Be Done</option>
-                    <option>In Progress</option>
-                    <option>Completed</option>
+
+                <div class="col col-2">
+                  <span *ngIf="!isEditOn">
+                    {{ item.relation }}
+                  </span>
+                  <select
+                    [(ngModel)]="item.relation"
+                    *ngIf="isEditOn"
+                    class="form-select"
+                    aria-label="Default select example"
+                  >
+                    <option selected disabled>Select Relation</option>
+                    <option value="Brother">Brother</option>
+                    <option value="Sister">Sister</option>
+                    <option value="Mother">Mother</option>
+                    <option value="Mother-in-Law">Mother In Law</option>
+                    <option value="Father">Father</option>
+                    <option value="Wife">Wife</option>
+                    <option value="father-in-Law">Father In-Law</option>
                   </select>
                 </div>
-              </div>
-              <button type="submit" [disabled]="!todoForm.valid" class="btn btn-danger">Create</button>
-            </form> -->
-            <div class="container">
-              <input type="text" id="myInput" (input)="searchList($event.target.value)" placeholder="Search for relatives.." title="Type in a name">
-
-              <ul class="responsive-table">
-                <li class="table-header">
-                  <div class="col col-1">Name</div>
-                  <div class="col col-2">Relatiion</div>
-                  <div class="col col-2">Actions</div>
-                </li>
-                <li class="table-row" *ngFor="let item of this.filteredData">
-                  <div class="col col-1" >{{item.name}}</div>
-                  <div class="col col-2">{{item.relation}}</div>
-                  <div class="col col-2">
-                    <button class="btn btn-primary btn-sm m-1"  >Edit</button>
-                    <button class="btn btn-danger btn-sm"  (click)="deleteFromList(item)">Delete</button>
-
-                  </div>
-                </li>
-               
-              </ul>
-            </div>
+                <div class="col col-3">
+                  <button
+                    class="btn btn-primary btn-sm m-1"
+                    (click)="isEditOn = !isEditOn"
+                  >
+                    {{ isEditOn ? "Update" : "Edit" }}
+                  </button>
+                  <button
+                    class="btn btn-danger btn-sm"
+                    (click)="deleteFromList(item)"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-
-      
+    </div>
   </div>
 </div>
-
