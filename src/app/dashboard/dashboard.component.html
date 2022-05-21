@@ -58,13 +58,14 @@
                     <option value="Mother-in-Law">Mother In Law</option>
                     <option value="Father">Father</option>
                     <option value="Wife">Wife</option>
+                    <option value="Son">Son</option>
                     <option value="father-in-Law">Father In-Law</option>
                   </select>
                 </div>
                 <div class="col col-3">
                   <button
                     class="btn btn-primary btn-sm m-1"
-                    (click)="isEditOn = !isEditOn"
+                    (click)="isEditOn = !isEditOn; editItems(item)"
                   >
                     {{ isEditOn ? "Update" : "Edit" }}
                   </button>
