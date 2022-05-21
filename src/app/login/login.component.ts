@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         iterator.email == this.model.email &&
         iterator.password == this.model.password
       ) {
+        localStorage.setItem("user", JSON.stringify(iterator));
         this.router.navigate(["/dashboard"]);
         return;
       }

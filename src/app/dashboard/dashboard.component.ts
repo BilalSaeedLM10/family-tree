@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   allTargets: any = [];
   isEditOn: Boolean = false;
   baseNodeObj: any = {};
+  user: any;
   @ViewChild("graph", { static: false }) divHello: ElementRef<HTMLElement>;
 
   constructor(private router: Router, public todo: TodoService) {
@@ -31,6 +32,8 @@ export class DashboardComponent implements OnInit {
         this.allNodes.push(x.name);
       });
       this.allNodes = [...new Set(this.allNodes)];
+      const user = localStorage.getItem("user");
+      this.user = user;
 
       console.log("All nodes", this.allNodes);
     });

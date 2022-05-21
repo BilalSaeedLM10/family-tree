@@ -63,18 +63,23 @@
                   </select>
                 </div>
                 <div class="col col-3">
-                  <button
-                    class="btn btn-primary btn-sm m-1"
-                    (click)="isEditOn = !isEditOn; editItems(item)"
-                  >
-                    {{ isEditOn ? "Update" : "Edit" }}
-                  </button>
-                  <button
-                    class="btn btn-danger btn-sm"
-                    (click)="deleteFromList(item)"
-                  >
-                    Delete
-                  </button>
+                  <div *ngIf="user.permission == 'all'; else unAuthorized">
+                    <button
+                      class="btn btn-primary btn-sm m-1"
+                      (click)="isEditOn = !isEditOn; editItems(item)"
+                    >
+                      {{ isEditOn ? "Update" : "Edit" }}
+                    </button>
+                    <button
+                      class="btn btn-danger btn-sm"
+                      (click)="deleteFromList(item)"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  <ng-template #unAuthorized>
+                    You are not allowed to make changes
+                  </ng-template>
                 </div>
               </li>
             </ul>
