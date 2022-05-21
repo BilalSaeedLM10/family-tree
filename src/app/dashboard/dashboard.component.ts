@@ -65,6 +65,7 @@ export class DashboardComponent implements OnInit {
 
   generateGraph() {
     let links = [];
+    this.filteredData = this.todo.data;
 
     for (let index = 0; index < this.filteredData.length; index++) {
       const element = this.filteredData[index];
@@ -191,5 +192,12 @@ export class DashboardComponent implements OnInit {
     };
     this.todo.chartData = obj;
     this.router.navigate([`family-graph`]);
+  }
+
+  editItems(item) {
+    const index = this.todo.data.indexOf(item);
+    if (index != -1) {
+      this.todo.data[index] = item;
+    }
   }
 }
